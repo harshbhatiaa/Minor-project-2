@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WHISPER</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    .chat-container {
+      max-width: 700px;
+      min-height: 500px;
+      margin: 0 auto;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #b2de45;
+      overflow: hidden;
+    }
+    
+    .chat-header {
+      background-color: #b2de45;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    
+    .chat-body {
+      padding: 10px;
+      overflow-y: scroll;
+      max-height: 300px;
+    }
+    
+    .chat-message {
+      background-color: #ffe2fe;
+      padding: 5px 10px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      max-width: 300px;
+    }
+    
+    .user-message {
+      background-color: #afa3ad;
+      align-self: flex-end;
+    }
+    
+    .input-container {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 10px;
+      border-top: 3px solid #ccc;
+    }
+    
+    .input-container input[type="text"] {
+      flex-grow: 1;
+      padding: 5px; /* Increase the padding to increase the size */
+      border-radius: 20px;
+      border: 1px solid #100808;
+      width: 280px;
+      margin-top: 10px;
+    }
+    
+    .input-container button {
+      margin-left: 10px;
+      margin-top: 10px;
+      padding: 5px 10px;
+      border-radius: 20px;
+      border: none;
+      background-color: #636663;
+      color: #fff;
+    }
+
+    /* Additional CSS styling for display window */
+    .display-window {
+      background-image: url(/static/whisper1.jfif.jpg);
+      background-size: cover;
+      background-position: center;
+      background-color: #070505;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+      min-height: 500px;
+    }
+    
+    .display-window p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">
+      <h2><center>WHISPER</center></h2>
+    </div>
+    <div class="display-window" id="displayWindow">
+        {% for message in messages %}
+        <div class="chat-message">
+          <span class="sender">{{ message.sender }}:</span>
+          <span class="text">{{ message.message }}</span>
+          <span class="time">{{ message.time }}</span>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="input-container">
+        <form class="form" action="{{ url_for('send_message') }}" method="POST">
+          <input type="text"  name="sender" placeholder="Your name" required>
+          <input type="text" name="message" placeholder="Type your message here" required>
+          <button type="submit">Send</button>
+        </form>
+    </div>
+  </div>
+</body>
+</html>
